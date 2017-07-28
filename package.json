@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-health-check",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "PORT=8080 node ./bin/www",
+    "openshift": "nodeshift --osc.strictSSL=false",
+    "test": "tape test/*-test.js"
+  },
+  "files": [
+    "package.json",
+    "app.js",
+    "public",
+    "bin"
+  ],
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "debug": "~2.6.3",
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "nodeshift": "^0.3.0",
+    "supertest": "^3.0.0",
+    "tape": "^4.6.3"
+  }
+}
