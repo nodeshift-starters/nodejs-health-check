@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const probe = require('kube-probe');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,12 +27,12 @@ app.use('/api/killme', (request, response) => {
   return response.send('Stopping HTTP server, Bye bye world !');
 });
 
-app.use('/api/health/readiness', (request, response) => {
-  return response.send('OK');
-});
+const options = {
+  livenessCallback: (request, response) => {
+    return isOnline ? response.send('OK') : response.sendStatus(500);
+  }
+};
 
-app.use('/api/health/liveness', (request, response) => {
-  return isOnline ? response.send('OK') : response.sendStatus(500);
-});
+probe(app, options);
 
 module.exports = app;
