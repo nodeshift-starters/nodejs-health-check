@@ -1,3 +1,5 @@
+'use strict';
+
 const test = require('tape');
 const supertest = require('supertest');
 
@@ -21,6 +23,20 @@ test('test out greeting route with a query param', (t) => {
     .expect(200)
     .then(response => {
       t.equal(response.body.content, 'Hello, Luke');
+      t.end();
+    });
+});
+
+test('test out greeting route after /killme route', (t) => {
+  supertest(app)
+    .get('/api/killme')
+    .expect(200)
+    .then(response => {
+      t.equal(response.text, 'Stopping HTTP server, Bye bye world !', 'kill me endpoint reponse text');
+      return supertest(app)
+        .get('/api/greeting')
+        .expect(400);
+    }).then(response => {
       t.end();
     });
 });
