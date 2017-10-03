@@ -97,6 +97,7 @@ objects:
   metadata:
     name: nodejs-health-check
     labels:
+      app: nodejs-health-check
       provider: nodeshift
       project: nodejs-health-check
       version: 1.0.0
@@ -134,11 +135,13 @@ objects:
                 protocol: TCP
       metadata:
         labels:
+          app: nodejs-health-check
           project: nodejs-health-check
           provider: nodeshift
           version: 1.0.0
     replicas: 1
     selector:
+      app: nodejs-health-check
       project: nodejs-health-check
       provider: nodeshift
     triggers:
