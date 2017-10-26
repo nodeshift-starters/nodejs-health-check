@@ -42,9 +42,9 @@ app.use('/api/greeting', (request, response) => {
   return response.send({content: `Hello, ${name || 'World'}`});
 });
 
-app.use('/api/killme', (request, response) => {
+app.use('/api/stop', (request, response) => {
   isOnline = false;
-  return response.send('Stopping HTTP server, Bye bye world !');
+  return response.send('Stopping HTTP server');
 });
 
 const options = {

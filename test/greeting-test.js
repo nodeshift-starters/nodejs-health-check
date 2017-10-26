@@ -27,12 +27,12 @@ test('test out greeting route with a query param', (t) => {
     });
 });
 
-test('test out greeting route after /killme route', (t) => {
+test('test out greeting route after /stop route', (t) => {
   supertest(app)
-    .get('/api/killme')
+    .get('/api/stop')
     .expect(200)
     .then(response => {
-      t.equal(response.text, 'Stopping HTTP server, Bye bye world !', 'kill me endpoint reponse text');
+      t.equal(response.text, 'Stopping HTTP server', 'stop endpoint reponse text');
       return supertest(app)
         .get('/api/greeting')
         .expect(400);
