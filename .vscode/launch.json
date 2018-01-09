@@ -12,6 +12,16 @@
                 "PORT": "8080"
             },
             "program": "${workspaceFolder}/bin/www"
-        }
+        },
+        {
+			"name": "Run tests",
+            "request": "launch",
+			"type": "node",
+			"program": "${workspaceFolder}/node_modules/tape/bin/tape",
+			"stopOnEntry": false,
+			"args": ["test/*.js"],
+			"cwd": "${workspaceFolder}/",
+			"runtimeExecutable": null
+		}
     ]
 }
