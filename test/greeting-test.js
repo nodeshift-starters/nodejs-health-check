@@ -48,9 +48,44 @@ test('test livenessCallback returns status OK', (t) => {
       t.end();
     }
   };
-  var mockProbe = function (expressApp, options) {
-    options.livenessCallback(null, mockres);
+  var mockProbe = {
+    init: (expressApp, options) => {
+      this.options = options;
+    },
+    trigger: () => {
+      this.options.livenessCallback(null, mockres);
+    }
   };
-  const proxyApp = proxyquire('../app', {'kube-probe': mockProbe});
-  supertest(proxyApp);
+  const proxyApp = proxyquire('../app', {'kube-probe': mockProbe.init});
+  supertest(proxyApp)
+    .get('/api/greeting?name=Luke')
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .then(response => {
+      mockProbe.trigger();
+    });
+});
+test('test livenessCallback returns statusCode 500', (t) => {
+  var mockres = {
+    sendStatus: function (statusCode) {
+      t.equal(statusCode, 500);
+      t.end();
+    }
+  };
+
+  var mockProbe = {
+    init: (expressApp, options) => {
+      this.options = options;
+    },
+    trigger: () => {
+      this.options.livenessCallback(null, mockres);
+    }
+  };
+  const proxyApp = proxyquire('../app', {'kube-probe': mockProbe.init});
+  supertest(proxyApp)
+    .get('/api/stop')
+    .expect(200)
+    .then(response => {
+      mockProbe.trigger();
+    });
 });
