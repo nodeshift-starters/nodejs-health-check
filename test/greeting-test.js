@@ -2,7 +2,7 @@
 
 const test = require('tape');
 const supertest = require('supertest');
-
+const proxyquire = require('proxyquire');
 const app = require('../app');
 
 test('test out greeting route with no query param', (t) => {
@@ -39,4 +39,18 @@ test('test out greeting route after /stop route', (t) => {
     }).then(response => {
       t.end();
     });
+});
+
+test('test livenessCallback returns status OK', (t) => {
+  var mockres = {
+    send: function (status) {
+      t.equal(status, 'OK');
+      t.end();
+    }
+  };
+  var mockProbe = function (expressApp, options) {
+    options.livenessCallback(null, mockres);
+  };
+  const proxyApp = proxyquire('../app', {'kube-probe': mockProbe});
+  supertest(proxyApp);
 });
