@@ -41,7 +41,7 @@ app.use('/api/greeting', (request, response) => {
   }
 
   const name = request.query ? request.query.name : undefined;
-  return response.send({content: `Hello, ${name || 'World'}`});
+  return response.send({content: `Hello, ${name || 'World!'}`});
 });
 
 app.use('/api/stop', (request, response) => {
