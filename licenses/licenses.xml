@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <licenseSummary>
     <project>nodejs-health-check</project>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <license>Apache-2.0</license>
     <dependencies>
         <dependency>
@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <packageName>kube-probe</packageName>
-            <version>0.3.0</version>
+            <version>0.3.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
