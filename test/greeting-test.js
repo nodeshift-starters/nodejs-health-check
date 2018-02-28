@@ -32,10 +32,10 @@ test('test out greeting route after /stop route', (t) => {
     .get('/api/stop')
     .expect(200)
     .then(response => {
-      t.equal(response.text, 'Stopping HTTP server', 'stop endpoint reponse text');
+      t.equal(response.text, 'Stopping HTTP server', 'stop endpoint response text');
       return supertest(app)
         .get('/api/greeting')
-        .expect(400);
+        .expect(503);
     }).then(response => {
       t.end();
     });
