@@ -37,6 +37,7 @@ test('test out greeting route after /stop route', (t) => {
         .get('/api/greeting')
         .expect(503);
     }).then(response => {
+      t.equal(response.text, 'Not online', 'should have a not online text');
       t.end();
     });
 });

@@ -37,7 +37,8 @@ let isOnline = true;
 //
 app.use('/api/greeting', (request, response) => {
   if (!isOnline) {
-    return response.sendStatus(503);
+    response.status(503);
+    return response.send('Not online');
   }
 
   const name = request.query ? request.query.name : undefined;
