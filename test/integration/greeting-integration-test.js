@@ -1,10 +1,10 @@
 'use strict';
 
+const util = require('util');
 const test = require('tape');
 const supertest = require('supertest');
 const rhoaster = require('rhoaster');
 
-const util = require('util');
 const setTimeoutPromise = util.promisify(setTimeout);
 
 const packagejson = require('../../package.json');
@@ -45,7 +45,7 @@ function runTests (route) {
   });
 
   test('/api/health/readiness returns OK', async t => {
-    // wait the initial 60 seconds before the liveness probe kicks in.
+    // Wait the initial 60 seconds before the liveness probe kicks in.
     await setTimeoutPromise(60000);
     supertest(route)
       .get('/api/health/readiness')
@@ -60,7 +60,7 @@ function runTests (route) {
       })
       .then(response => {
         t.equal(response.text, 'Stopping HTTP server', 'should be stopping the server');
-        // check that the greeting is down
+        // Check that the greeting is down
         return supertest(route)
           .get('/api/greeting')
           .expect(503);
@@ -76,7 +76,7 @@ function runTests (route) {
         t.equal(response.statusCode, 500, 'shold have a 500 response');
       })
       .then(_ => {
-        // wait until the app is back up
+        // Wait until the app is back up
         return setTimeoutPromise(20000);
       }).then(_ => {
         // After we wait check the app again

@@ -18,18 +18,17 @@
  *
  */
 
-const express = require('express');
 const path = require('path');
+const express = require('express');
 const bodyParser = require('body-parser');
+const probe = require('kube-probe');
 
 const app = express();
 
-const probe = require('kube-probe');
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-// expose the license.html at http[s]://[host]:[port]/licences/licenses.html
+// Expose the license.html at http[s]://[host]:[port]/licences/licenses.html
 app.use('/licenses', express.static(path.join(__dirname, 'licenses')));
 
 let isOnline = true;
