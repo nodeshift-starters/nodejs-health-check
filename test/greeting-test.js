@@ -5,7 +5,7 @@ const supertest = require('supertest');
 const proxyquire = require('proxyquire');
 const app = require('../app');
 
-test('test out greeting route with no query param', (t) => {
+test('test out greeting route with no query param', t => {
   supertest(app)
     .get('/api/greeting')
     .expect('Content-Type', /json/)
@@ -16,7 +16,7 @@ test('test out greeting route with no query param', (t) => {
     });
 });
 
-test('test out greeting route with a query param', (t) => {
+test('test out greeting route with a query param', t => {
   supertest(app)
     .get('/api/greeting?name=Luke')
     .expect('Content-Type', /json/)
@@ -27,7 +27,7 @@ test('test out greeting route with a query param', (t) => {
     });
 });
 
-test('test out greeting route after /stop route', (t) => {
+test('test out greeting route after /stop route', t => {
   supertest(app)
     .get('/api/stop')
     .expect(200)
@@ -42,14 +42,14 @@ test('test out greeting route after /stop route', (t) => {
     });
 });
 
-test('test livenessCallback returns status OK', (t) => {
-  var mockres = {
-    send: function (status) {
+test('test livenessCallback returns status OK', t => {
+  const mockres = {
+    send: status => {
       t.equal(status, 'OK');
       t.end();
     }
   };
-  var mockProbe = {
+  const mockProbe = {
     init: (expressApp, options) => {
       this.options = options;
     },
@@ -62,19 +62,19 @@ test('test livenessCallback returns status OK', (t) => {
     .get('/api/greeting?name=Luke')
     .expect('Content-Type', /json/)
     .expect(200)
-    .then(response => {
+    .then(() => {
       mockProbe.trigger();
     });
 });
-test('test livenessCallback returns statusCode 500', (t) => {
-  var mockres = {
-    sendStatus: function (statusCode) {
+test('test livenessCallback returns statusCode 500', t => {
+  const mockres = {
+    sendStatus: statusCode => {
       t.equal(statusCode, 500);
       t.end();
     }
   };
 
-  var mockProbe = {
+  const mockProbe = {
     init: (expressApp, options) => {
       this.options = options;
     },
@@ -86,7 +86,7 @@ test('test livenessCallback returns statusCode 500', (t) => {
   supertest(proxyApp)
     .get('/api/stop')
     .expect(200)
-    .then(response => {
+    .then(() => {
       mockProbe.trigger();
     });
 });
