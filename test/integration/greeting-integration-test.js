@@ -11,7 +11,7 @@ const packagejson = require('../../package.json');
 
 const testEnvironment = rhoaster({
   deploymentName: packagejson.name,
-  nodeVersion: '8.x'
+  nodeVersion: '10.x'
 });
 
 testEnvironment.deploy()
