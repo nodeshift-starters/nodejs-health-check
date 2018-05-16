@@ -91,7 +91,7 @@ objects:
         provider: nodeshift
         expose: 'true'
         project: nodejs-health-check
-        version: 1.2.3
+        version: 2.0.0
   - apiVersion: v1
     kind: DeploymentConfig
     metadata:
@@ -100,7 +100,7 @@ objects:
         app: nodejs-health-check
         provider: nodeshift
         project: nodejs-health-check
-        version: 1.2.3
+        version: 2.0.0
     spec:
       template:
         spec:
@@ -138,7 +138,7 @@ objects:
             app: nodejs-health-check
             project: nodejs-health-check
             provider: nodeshift
-            version: 1.2.3
+            version: 2.0.0
       replicas: 1
       selector:
         app: nodejs-health-check
@@ -160,7 +160,7 @@ objects:
       labels:
         project: nodejs-health-check
         provider: nodeshift
-        version: 1.2.3
+        version: 2.0.0
       name: nodejs-health-check
     spec:
       port:
