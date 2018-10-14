@@ -1,0 +1,27 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "creationTimestamp": null,
+    "name": "nodejs-rest-http",
+    "labels": {
+      "run": "nodejs-rest-http"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "nodejs-rest-http",
+        "image": "bucharestgold/nodejs-rest-http",
+        "ports": [
+          {
+            "containerPort": 8080,
+            "name": "http",
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {}
+      }
+    ]
+  }
+}
