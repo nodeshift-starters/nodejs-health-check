@@ -3,16 +3,16 @@
   "apiVersion": "v1",
   "metadata": {
     "creationTimestamp": null,
-    "name": "nodejs-rest-http",
+    "name": "nodejs-health-check",
     "labels": {
-      "run": "nodejs-rest-http"
+      "run": "nodejs-health-check"
     }
   },
   "spec": {
     "containers": [
       {
-        "name": "nodejs-rest-http",
-        "image": "bucharestgold/nodejs-rest-http",
+        "name": "nodejs-health-check",
+        "image": "bucharestgold/nodejs-health-check",
         "ports": [
           {
             "containerPort": 8080,
