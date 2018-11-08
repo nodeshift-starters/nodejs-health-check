@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/nodeshift-starters/nodejs-health-check/compare/v1.2.3...v1.3.0) (2018-11-08)
+
+
+### Bug Fixes
+
+* travis-ci should use npm install instead of npm ci ([008e39c](https://github.com/nodeshift-starters/nodejs-health-check/commit/008e39c))
+
+
+### Features
+
+* start using node.js 10. ([20c2c2b](https://github.com/nodeshift-starters/nodejs-health-check/commit/20c2c2b)), closes [#104](https://github.com/nodeshift-starters/nodejs-health-check/issues/104)
+
+
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/nodeshift-starters/nodejs-health-check/compare/v1.2.2...v1.2.3) (2018-04-26)
 
