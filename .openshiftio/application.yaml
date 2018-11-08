@@ -60,7 +60,7 @@ objects:
         sourceStrategy:
           from:
             kind: DockerImage
-            name: 'nodeshift/centos7-s2i-nodejs:10.x'
+            name: 'nodeshift/centos7-s2i-nodejs:8.x'
           incremental: true
       triggers:
         - github:
