@@ -13,7 +13,7 @@ parameters:
   - name: RELEASE_VERSION
     description: The release version number of application
     displayName: Release version
-    value: 2.0.0
+    value: 2.0.1
   - name: SOURCE_REPOSITORY_URL
     description: The source URL for the application
     displayName: Source URL
@@ -33,16 +33,16 @@ objects:
   - apiVersion: image.openshift.io/v1
     kind: ImageStream
     metadata:
-      name: nodejs-health-check${SUFFIX_NAME}
+      name: 'nodejs-health-check${SUFFIX_NAME}'
       labels:
-          version: ${RELEASE_VERSION}
+        version: '${RELEASE_VERSION}'
     spec: {}
   - apiVersion: v1
     kind: BuildConfig
     metadata:
-      name: nodejs-health-check-s2i${SUFFIX_NAME}
+      name: 'nodejs-health-check-s2i${SUFFIX_NAME}'
       labels:
-          version: ${RELEASE_VERSION}
+        version: '${RELEASE_VERSION}'
     spec:
       output:
         to:
@@ -81,21 +81,21 @@ objects:
         project: nodejs-health-check
         provider: nodeshift
     metadata:
-      name: nodejs-health-check${SUFFIX_NAME}
+      name: 'nodejs-health-check${SUFFIX_NAME}'
       labels:
         provider: nodeshift
         expose: 'true'
         project: nodejs-health-check
-        version: ${RELEASE_VERSION}
+        version: '${RELEASE_VERSION}'
   - apiVersion: v1
     kind: DeploymentConfig
     metadata:
-      name: nodejs-health-check${SUFFIX_NAME}
+      name: 'nodejs-health-check${SUFFIX_NAME}'
       labels:
         app: nodejs-health-check
         provider: nodeshift
         project: nodejs-health-check
-        version: ${RELEASE_VERSION}
+        version: '${RELEASE_VERSION}'
     spec:
       template:
         spec:
@@ -120,7 +120,7 @@ objects:
                 periodSeconds: 3
                 successThreshold: 1
                 timeoutSeconds: 1
-              image: ""
+              image: ''
               name: nodejs-health-check
               securityContext:
                 privileged: false
@@ -133,7 +133,7 @@ objects:
             app: nodejs-health-check
             project: nodejs-health-check
             provider: nodeshift
-            version: ${RELEASE_VERSION}
+            version: '${RELEASE_VERSION}'
       replicas: 1
       selector:
         app: nodejs-health-check
@@ -155,11 +155,11 @@ objects:
       labels:
         project: nodejs-health-check
         provider: nodeshift
-        version: ${RELEASE_VERSION}
-      name: nodejs-health-check${SUFFIX_NAME}
+        version: '${RELEASE_VERSION}'
+      name: 'nodejs-health-check${SUFFIX_NAME}'
     spec:
       port:
         targetPort: 8080
       to:
         kind: Service
-        name: nodejs-health-check${SUFFIX_NAME}
+        name: 'nodejs-health-check${SUFFIX_NAME}'
