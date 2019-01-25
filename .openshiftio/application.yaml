@@ -138,6 +138,10 @@ objects:
                 - containerPort: 8080
                   name: http
                   protocol: TCP
+              resources:
+                limits:
+                  cpu: '400m'
+                  memory: '256Mi'
         metadata:
           labels:
             app: nodejs-health-check
