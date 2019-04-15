@@ -13,7 +13,7 @@ parameters:
   - name: RELEASE_VERSION
     description: The release version number of application
     displayName: Release version
-    value: 2.0.2
+    value: 2.0.3
   - name: SOURCE_REPOSITORY_URL
     description: The source URL for the application
     displayName: Source URL
@@ -140,8 +140,8 @@ objects:
                   protocol: TCP
               resources:
                 limits:
-                  cpu: '400m'
-                  memory: '256Mi'
+                  cpu: 400m
+                  memory: 256Mi
         metadata:
           labels:
             app: nodejs-health-check
