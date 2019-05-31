@@ -46,7 +46,7 @@ objects:
         - name: latest
           from:
             kind: DockerImage
-            name: 'registry.access.redhat.com/rhoar-nodejs/nodejs-10:latest'
+            name: 'nodeshift/centos7-s2i-nodejs:10.x'
   - apiVersion: v1
     kind: BuildConfig
     metadata:
