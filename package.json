@@ -1,6 +1,6 @@
 {
   "name": "nodejs-health-check",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "author": "Red Hat, Inc.",
   "license": "Apache-2.0",
   "scripts": {
