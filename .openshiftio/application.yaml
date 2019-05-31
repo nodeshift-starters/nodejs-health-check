@@ -17,6 +17,7 @@ parameters:
   - name: SOURCE_REPOSITORY_URL
     description: The source URL for the application
     displayName: Source URL
+    value: 'https://github.com/nodeshift-starters/nodejs-health-check'
     required: true
   - name: SOURCE_REPOSITORY_REF
     description: The branch name for the application
@@ -46,7 +47,7 @@ objects:
         - name: latest
           from:
             kind: DockerImage
-            name: 'registry.access.redhat.com/rhoar-nodejs/nodejs-10:latest'
+            name: 'nodeshift/centos7-s2i-nodejs:12.x'
   - apiVersion: v1
     kind: BuildConfig
     metadata:
