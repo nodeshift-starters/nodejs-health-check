@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.0.0](https://github.com/nodeshift-starters/nodejs-health-check/compare/v2.0.3...v3.0.0) (2019-05-31)
+
+
+### Features
+
+*  Update to use Node.js 12.x ([26ea7f3](https://github.com/nodeshift-starters/nodejs-health-check/commit/26ea7f3))
+
+
+### BREAKING CHANGES
+
+* start using node 12
+
+
 
 ## [2.0.3](https://github.com/nodeshift-starters/nodejs-health-check/compare/v2.0.2...v2.0.3) (2019-04-15)
 
