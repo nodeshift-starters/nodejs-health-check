@@ -10,8 +10,7 @@ const setTimeoutPromise = util.promisify(setTimeout);
 const packagejson = require('../../package.json');
 
 const testEnvironment = rhoaster({
-  deploymentName: packagejson.name,
-  nodeVersion: '10.x'
+  deploymentName: packagejson.name
 });
 
 testEnvironment.deploy()
