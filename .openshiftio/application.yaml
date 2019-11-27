@@ -13,7 +13,7 @@ parameters:
   - name: RELEASE_VERSION
     description: The release version number of application
     displayName: Release version
-    value: 2.0.4
+    value: 2.0.5
   - name: SOURCE_REPOSITORY_URL
     description: The source URL for the application
     displayName: Source URL
@@ -46,7 +46,7 @@ objects:
         - name: latest
           from:
             kind: DockerImage
-            name: 'registry.access.redhat.com/ubi8/nodejs-10'
+            name: registry.access.redhat.com/ubi8/nodejs-10
   - apiVersion: build.openshift.io/v1
     kind: BuildConfig
     metadata:
