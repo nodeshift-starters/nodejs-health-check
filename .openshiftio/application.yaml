@@ -54,6 +54,7 @@ objects:
       name: 'nodejs-health-check-s2i${SUFFIX_NAME}'
       labels:
         version: '${RELEASE_VERSION}'
+        'app.openshift.io/runtime': 'nodejs'
     spec:
       output:
         to:
@@ -98,6 +99,7 @@ objects:
         expose: 'true'
         project: nodejs-health-check
         version: '${RELEASE_VERSION}'
+        'app.openshift.io/runtime': 'nodejs'
   - apiVersion: apps.openshift.io/v1
     kind: DeploymentConfig
     metadata:
@@ -107,6 +109,7 @@ objects:
         provider: nodeshift
         project: nodejs-health-check
         version: '${RELEASE_VERSION}'
+        'app.openshift.io/runtime': 'nodejs'
     spec:
       template:
         spec:
@@ -172,6 +175,7 @@ objects:
         provider: nodeshift
         version: '${RELEASE_VERSION}'
       name: 'nodejs-health-check${SUFFIX_NAME}'
+      'app.openshift.io/runtime': 'nodejs'
     spec:
       port:
         targetPort: 8080
