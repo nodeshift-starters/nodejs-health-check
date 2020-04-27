@@ -13,7 +13,7 @@ parameters:
   - name: RELEASE_VERSION
     description: The release version number of application
     displayName: Release version
-    value: 3.0.1
+    value: 3.0.2
   - name: SOURCE_REPOSITORY_URL
     description: The source URL for the application
     displayName: Source URL
@@ -54,7 +54,7 @@ objects:
       name: 'nodejs-health-check-s2i${SUFFIX_NAME}'
       labels:
         version: '${RELEASE_VERSION}'
-        'app.openshift.io/runtime': 'nodejs'
+        app.openshift.io/runtime: nodejs
     spec:
       output:
         to:
@@ -99,7 +99,7 @@ objects:
         expose: 'true'
         project: nodejs-health-check
         version: '${RELEASE_VERSION}'
-        'app.openshift.io/runtime': 'nodejs'
+        app.openshift.io/runtime: nodejs
   - apiVersion: apps.openshift.io/v1
     kind: DeploymentConfig
     metadata:
@@ -109,7 +109,7 @@ objects:
         provider: nodeshift
         project: nodejs-health-check
         version: '${RELEASE_VERSION}'
-        'app.openshift.io/runtime': 'nodejs'
+        app.openshift.io/runtime: nodejs
     spec:
       template:
         spec:
@@ -175,7 +175,7 @@ objects:
         provider: nodeshift
         version: '${RELEASE_VERSION}'
       name: 'nodejs-health-check${SUFFIX_NAME}'
-      'app.openshift.io/runtime': 'nodejs'
+      app.openshift.io/runtime: nodejs
     spec:
       port:
         targetPort: 8080
