@@ -57,7 +57,7 @@ test('test livenessCallback returns status OK', t => {
       this.options.livenessCallback(null, mockres);
     }
   };
-  const proxyApp = proxyquire('../app', {'kube-probe': mockProbe.init});
+  const proxyApp = proxyquire('../app', { 'kube-probe': mockProbe.init });
   supertest(proxyApp)
     .get('/api/greeting?name=Luke')
     .expect('Content-Type', /json/)
@@ -82,7 +82,7 @@ test('test livenessCallback returns statusCode 500', t => {
       this.options.livenessCallback(null, mockres);
     }
   };
-  const proxyApp = proxyquire('../app', {'kube-probe': mockProbe.init});
+  const proxyApp = proxyquire('../app', { 'kube-probe': mockProbe.init });
   supertest(proxyApp)
     .get('/api/stop')
     .expect(200)
