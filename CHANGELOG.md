@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/nodeshift-starters/nodejs-health-check/compare/v3.0.2...v4.0.0) (2020-11-26)
+
+
+### Features
+
+* upgrade tape from 4.13.2 to 5.0.1 ([#186](https://github.com/nodeshift-starters/nodejs-health-check/issues/186)) ([00d27fc](https://github.com/nodeshift-starters/nodejs-health-check/commit/00d27fc270ce2b3d5d0b9ea18ba38bb4a175954d))
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#180](https://github.com/nodeshift-starters/nodejs-health-check/issues/180)) ([6b7ce31](https://github.com/nodeshift-starters/nodejs-health-check/commit/6b7ce316afde959bb44df7a00e2c38521d52d7cc))
+* package.json & package-lock.json to reduce vulnerabilities ([#182](https://github.com/nodeshift-starters/nodejs-health-check/issues/182)) ([fbdb2d6](https://github.com/nodeshift-starters/nodejs-health-check/commit/fbdb2d6006295d01293d22bf02766a1ae9873d90))
+* upgrade coveralls from 3.0.11 to 3.1.0 ([#187](https://github.com/nodeshift-starters/nodejs-health-check/issues/187)) ([c74d018](https://github.com/nodeshift-starters/nodejs-health-check/commit/c74d018a15e0fc118d56868bccdbc29040134a97))
+* upgrade coveralls from 3.0.9 to 3.0.11 ([#176](https://github.com/nodeshift-starters/nodejs-health-check/issues/176)) ([c9b8f3c](https://github.com/nodeshift-starters/nodejs-health-check/commit/c9b8f3cdcf85532522f9894fd0b7b72f646feb2e))
+* upgrade debug from 4.1.1 to 4.2.0 ([#178](https://github.com/nodeshift-starters/nodejs-health-check/issues/178)) ([13b1d82](https://github.com/nodeshift-starters/nodejs-health-check/commit/13b1d82f6e1e08fd57845b9b2a6dc8e4b896b906))
+* upgrade kube-probe from 0.4.0 to 0.5.0 ([#189](https://github.com/nodeshift-starters/nodejs-health-check/issues/189)) ([da26fff](https://github.com/nodeshift-starters/nodejs-health-check/commit/da26fffb24e25a7a5f18e1f70767bc2579ccad6f))
+* upgrade nodeshift from 6.0.2 to 6.2.0 ([#188](https://github.com/nodeshift-starters/nodejs-health-check/issues/188)) ([9542ed3](https://github.com/nodeshift-starters/nodejs-health-check/commit/9542ed3064297a4c0a78b5dfa258456f26e5ef33))
+
 ### [3.0.2](https://github.com/nodeshift-starters/nodejs-health-check/compare/v3.0.1...v3.0.2) (2020-04-27)
 
 ### [3.0.1](https://github.com/nodeshift-starters/nodejs-health-check/compare/v3.0.0...v3.0.1) (2019-11-27)
