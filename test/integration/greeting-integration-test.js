@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 'use strict';
 
+const assert = require('assert');
 const util = require('util');
-const test = require('tape');
 const supertest = require('supertest');
 const rhoaster = require('rhoaster');
 
@@ -14,80 +15,61 @@ const testEnvironment = rhoaster({
   dockerImage: 'registry.access.redhat.com/ubi8/nodejs-12'
 });
 
-testEnvironment.deploy()
-  .then(runTests)
-  .then(_ => test.onFinish(testEnvironment.undeploy))
-  .catch(console.error);
+describe('Greeting route', () => {
+  let route;
+  before(async function () {
+    this.timeout(0);
+    route = await testEnvironment.deploy();
+  });
 
-function runTests (route) {
-  test('/api/greeting', t => {
-    t.plan(1);
-    supertest(route)
+  it('/api/greeting', async () => {
+    const { body } = await supertest(route)
       .get('/api/greeting')
-      .expect(200)
       .expect('Content-Type', /json/)
-      .then(response => {
-        t.equal(response.body.content, 'Hello, World!', 'should return the Hello, World Greeting');
-        t.end();
-      });
+      .expect(200);
+
+    assert.strictEqual(body.content, 'Hello, World!');
   });
 
-  test('/api/greeting with query param', t => {
-    t.plan(1);
-    supertest(route)
+  it('/api/greeting with query param', async () => {
+    const { body } = await supertest(route)
       .get('/api/greeting?name=luke')
-      .expect(200)
       .expect('Content-Type', /json/)
-      .then(response => {
-        t.equal(response.body.content, 'Hello, luke', 'should return the Hello, luke Greeting');
-        t.end();
-      });
+      .expect(200);
+
+    assert.strictEqual(body.content, 'Hello, luke');
   });
 
-  test('/api/health/readiness returns OK', async t => {
+  it('/api/health/readiness returns OK', async function () {
+    this.timeout(81000);
     // Wait the initial 60 seconds before the liveness probe kicks in.
     await setTimeoutPromise(60000);
-    supertest(route)
+    let response = await supertest(route)
       .get('/api/health/readiness')
       .expect(200)
       .expect('Content-Type', 'text/html')
-      .then(response => {
-        t.equal(response.text, 'OK', 'should return OK');
-        // Now shut the endpoint down
-        return supertest(route)
-          .get('/api/stop')
-          .expect(200);
-      })
-      .then(response => {
-        t.equal(response.text, 'Stopping HTTP server', 'should be stopping the server');
-        // Check that the greeting is down
-        return supertest(route)
-          .get('/api/greeting')
-          .expect(503);
-      })
-      .then(response => {
-        t.equal(response.statusCode, 503, 'shold have a 400 response');
-        // Now ping the liveness probe which should return a 50x response
-        return supertest(route)
-          .get('/api/health/liveness')
-          .expect(500);
-      })
-      .then(response => {
-        t.equal(response.statusCode, 500, 'shold have a 500 response');
-      })
-      .then(_ => {
-        // Wait until the app is back up
-        return setTimeoutPromise(20000);
-      }).then(_ => {
-        // After we wait check the app again
-        supertest(route)
-          .get('/api/greeting')
-          .expect(200)
-          .expect('Content-Type', /json/)
-          .then(response => {
-            t.equal(response.body.content, 'Hello, World!', 'should return the Hello, World Greeting');
-            t.end();
-          });
-      });
+    assert.strictEqual(response.text, 'OK');
+    // Now shut the endpoint down
+    response = await supertest(route).get('/api/stop').expect(200);
+    assert.strictEqual(response.text, 'Stopping HTTP server');
+    // Check that the greeting is down
+    response = await supertest(route).get('/api/greeting').expect(503);
+    assert.strictEqual(response.statusCode, 503);
+    // Now ping the liveness probe which should return a 50x response
+    response = await supertest(route).get('/api/health/liveness').expect(500);
+    assert.strictEqual(response.statusCode, 500);
+    // Wait until the app is back up
+    await setTimeoutPromise(20000);
+    // After we wait check the app again
+    response = await supertest(route)
+      .get('/api/greeting')
+      .expect(200)
+      .expect('Content-Type', /json/);
+    assert.strictEqual(response.body.content, 'Hello, World!');
   });
-}
+
+  after(async function () {
+    this.timeout(0);
+    await testEnvironment.undeploy();
+  });
+});
