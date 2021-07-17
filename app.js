@@ -21,7 +21,6 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const probe = require('kube-probe');
 
 const app = express();
 
@@ -49,12 +48,20 @@ app.use('/api/stop', (request, response) => {
   return response.send('Stopping HTTP server');
 });
 
-const options = {
-  livenessCallback: (request, response) => {
-    return isOnline ? response.send('OK') : response.sendStatus(500);
-  }
-};
+// Only for testing locally.  A deployment on Openshift will handle this8
+app.use('/api/start', (request, response) => {
+  isOnline = true;
+  return response.send('Starting HTTP server');
+});
 
-probe(app, options);
+// Readiness Probe
+app.use('/ready', (request, response) => {
+  return response.sendStatus(200);
+});
+
+// Liveness Probe
+app.use('/live', (request, response) => {
+  return isOnline ? response.send('OK') : response.sendStatus(500);
+});
 
 module.exports = app;

@@ -47,7 +47,7 @@ describe('Greeting route', () => {
     let response = await supertest(route)
       .get('/api/health/readiness')
       .expect(200)
-      .expect('Content-Type', 'text/html')
+      .expect('Content-Type', 'text/html');
     assert.strictEqual(response.text, 'OK');
     // Now shut the endpoint down
     response = await supertest(route).get('/api/stop').expect(200);

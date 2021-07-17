@@ -3,7 +3,6 @@
 
 const assert = require('assert');
 const supertest = require('supertest');
-const proxyquire = require('proxyquire');
 const app = require('../app');
 
 describe('Test greeting route', () => {
@@ -25,67 +24,40 @@ describe('Test greeting route', () => {
     assert.strictEqual(body.content, 'Hello, Luke');
   });
 
-  it('after /stop route', () => {
-    supertest(app)
+  it('after /stop route', async () => {
+    let response = await supertest(app)
       .get('/api/stop')
-      .expect(200)
-      .then(response => {
-        assert.strictEqual(response.text, 'Stopping HTTP server');
-        return supertest(app)
-          .get('/api/greeting')
-          .expect(503);
-      }).then(response => {
-        assert.strictEqual(response.text, 'Not online');
-      });
+      .expect(200);
+    assert.strictEqual(response.text, 'Stopping HTTP server');
+
+    response = await supertest(app).get('/api/greeting').expect(503);
+    assert.strictEqual(response.text, 'Not online');
   });
 
-  it('livenessCallback returns status OK', () => {
-    const mockres = {
-      send: status => {
-        t.equal(status, 'OK');
-        t.end();
-      }
-    };
-    const mockProbe = {
-      init: (expressApp, options) => {
-        this.options = options;
-      },
-      trigger: () => {
-        this.options.livenessCallback(null, mockres);
-      }
-    };
-    const proxyApp = proxyquire('../app', { 'kube-probe': mockProbe.init });
-    supertest(proxyApp)
-      .get('/api/greeting?name=Luke')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .then(() => {
-        mockProbe.trigger();
-      });
+  it('/ready is ok', async () => {
+    await supertest(app)
+      .get('/ready')
+      .expect(200);
   });
 
-  it('livenessCallback returns statusCode 500', () => {
-    const mockres = {
-      sendStatus: statusCode => {
-        t.equal(statusCode, 500);
-        t.end();
-      }
-    };
+  it('/live is ok', async () => {
+    // set back to ok
+    await supertest(app).get('/api/start');
 
-    const mockProbe = {
-      init: (expressApp, options) => {
-        this.options = options;
-      },
-      trigger: () => {
-        this.options.livenessCallback(null, mockres);
-      }
-    };
-    const proxyApp = proxyquire('../app', { 'kube-probe': mockProbe.init });
-    supertest(proxyApp)
+    await supertest(app)
+      .get('/live')
+      .expect(200);
+  });
+
+  it('live is 500 after /stop route', async () => {
+    let response = await supertest(app)
       .get('/api/stop')
-      .expect(200)
-      .then(() => {
-        mockProbe.trigger();
-      });
+      .expect(200);
+
+    assert.strictEqual(response.text, 'Stopping HTTP server');
+
+    response = await supertest(app).get('/live').expect(500);
+
+    assert.strictEqual(response.text, 'Internal Server Error');
   });
 });
