@@ -40,14 +40,13 @@ describe('Greeting route', () => {
     assert.strictEqual(body.content, 'Hello, luke');
   });
 
-  it('/api/health/readiness returns OK', async function () {
+  it('/ready returns OK', async function () {
     this.timeout(81000);
     // Wait the initial 60 seconds before the liveness probe kicks in.
     await setTimeoutPromise(60000);
     let response = await supertest(route)
-      .get('/api/health/readiness')
-      .expect(200)
-      .expect('Content-Type', 'text/html');
+      .get('/ready')
+      .expect(200);
     assert.strictEqual(response.text, 'OK');
     // Now shut the endpoint down
     response = await supertest(route).get('/api/stop').expect(200);
@@ -56,7 +55,7 @@ describe('Greeting route', () => {
     response = await supertest(route).get('/api/greeting').expect(503);
     assert.strictEqual(response.statusCode, 503);
     // Now ping the liveness probe which should return a 50x response
-    response = await supertest(route).get('/api/health/liveness').expect(500);
+    response = await supertest(route).get('/live').expect(500);
     assert.strictEqual(response.statusCode, 500);
     // Wait until the app is back up
     await setTimeoutPromise(20000);
