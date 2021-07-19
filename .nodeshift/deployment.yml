@@ -4,7 +4,7 @@ spec:
       containers:
         - readinessProbe:
             httpGet:
-              path: /api/health/readiness
+              path: /ready
               port: 8080
               scheme: HTTP
             failureThreshold: 3
@@ -14,7 +14,7 @@ spec:
             timeoutSeconds: 1
           livenessProbe:
             httpGet:
-              path: /api/health/liveness
+              path: /live
               port: 8080
               scheme: HTTP
             failureThreshold: 2
