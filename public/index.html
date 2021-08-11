@@ -73,22 +73,22 @@
         crossorigin="anonymous"></script>
 
 <script>
-    var stopTime;
-    var attempts;
+    let stopTime;
+    let attempts;
 
     function invokeService() {
-        var n = $("#name").val() || "World";
+        const n = $("#name").val() || "World";
         $.getJSON("/api/greeting?name=" + n, function (res) {
             $("#greeting-result").html(JSON.stringify(res));
         });
     }
 
     function invokeServiceandRetryUponFailures() {
-        var n = $("#name").val() || "World";
+        const n = $("#name").val() || "World";
         $.getJSON("/api/greeting?name=" + n, function (res) {
-            var rebirth = new Date();
-            var diff = (stopTime.getTime() - rebirth.getTime()) / 1000;
-            var abs = Math.abs(diff);
+            const rebirth = new Date();
+            const diff = (stopTime.getTime() - rebirth.getTime()) / 1000;
+            const abs = Math.abs(diff);
             $("#greeting-result").html(JSON.stringify(res) + " (the recovery took " + abs + " seconds)");
         })
             .fail(function () {
