@@ -8,8 +8,6 @@
     "test": "nyc --reporter=lcov mocha",
     "test:integration": "mocha test/integration/*.js",
     "test:integration:undeploy": "nodeshift undeploy",
-    "coverage": "nyc npm test",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "release": "standard-version -a",
     "openshift": "nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-14",
     "postinstall": "license-reporter report -s && license-reporter save -s --xml licenses.xml",
@@ -39,7 +37,6 @@
   },
   "homepage": "https://github.com/nodeshift-starters/nodejs-health-check",
   "devDependencies": {
-    "coveralls": "^3.1.1",
     "eslint": "^7.32.0",
     "eslint-config-semistandard": "^16.0.0",
     "eslint-config-standard": "^16.0.3",

@@ -45,16 +45,6 @@
             </licenses>
         </dependency>
         <dependency>
-            <packageName>pino</packageName>
-            <version>6.13.0</version>
-            <licenses>
-                <license>
-                    <name>MIT License</name>
-                    <url>http://www.opensource.org/licenses/MIT</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
             <packageName>pino-debug</packageName>
             <version>2.0.0</version>
             <licenses>
