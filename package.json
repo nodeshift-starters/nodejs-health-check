@@ -58,7 +58,7 @@
     "debug": "^4.3.2",
     "express": "~4.17.1",
     "license-reporter": "~1.4.0",
-    "pino": "^6.13.2",
+    "pino": "^6.13.3",
     "pino-debug": "^2.0.0",
     "pino-pretty": "^5.1.3"
   }
