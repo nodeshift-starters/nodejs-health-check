@@ -46,7 +46,7 @@
   "dependencies": {
     "body-parser": "~1.19.0",
     "debug": "^4.3.3",
-    "express": "~4.17.1",
+    "express": "~4.17.2",
     "pino": "^7.5.1",
     "pino-debug": "^2.0.0",
     "pino-pretty": "^7.2.0"
