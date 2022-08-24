@@ -6,7 +6,7 @@ Example Health Check Application
 ## Running The Example
 
 You can run this example as node processes on your localhost, as pods on a local
-[code-ready-containers](https://developers.redhat.com/products/codeready-containers/overview) installation.
+[OpenShift Local](https://developers.redhat.com/products/openshift-local/overview) installation.
 
 ### Localhost
 
@@ -25,9 +25,9 @@ $ DEBUG=* npm start
 
 This will launch the application on port 8080.
 
-### CodeReady Containers
+### OpenShift Local
 
-CRC should be started, and you should be logged in with a currently
+OpenShift Local should be started, and you should be logged in with a currently
 active project. Then run the `npm run openshift` command.
 
 ```sh
