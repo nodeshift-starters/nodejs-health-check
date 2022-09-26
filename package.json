@@ -8,12 +8,16 @@
     "test": "nyc --reporter=lcov mocha",
     "release": "standard-version -a",
     "openshift": "nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-16",
-    "start": "node ."
+    "openshift:enable:trace": "nodeshift --deploy.env NODE_OPTIONS='--require ./tracing.js' --dockerImage=registry.access.redhat.com/ubi8/nodejs-16",
+    "start": "node .",
+    "dev": "node . | npx pino-pretty",
+    "dev:debug": "DEBUG=* node . "
   },
   "main": "./bin/www",
   "files": [
     "package.json",
     "app.js",
+    "logger.js",
     "tracing.js",
     "public",
     "bin",
@@ -48,10 +52,7 @@
     "@opentelemetry/sdk-trace-node": "^1.6.0",
     "@opentelemetry/semantic-conventions": "^1.6.0",
     "body-parser": "~1.20.0",
-    "debug": "^4.3.4",
     "express": "~4.18.1",
-    "pino": "^8.4.2",
-    "pino-debug": "^2.0.0",
-    "pino-pretty": "^9.1.0"
+    "pino": "^8.4.2"
   }
 }
